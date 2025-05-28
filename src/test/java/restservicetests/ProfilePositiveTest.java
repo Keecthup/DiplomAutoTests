@@ -2,12 +2,14 @@ package restservicetests;
 
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
-import pojo.AuthLogin;
-import pojo.AuthLoginResponse;
-import pojo.PasswordChangeDto;
+import model.requestDTO.AuthLogin;
+import model.responseDTO.AuthLoginResponse;
+import model.requestDTO.PasswordChangeDto;
 
 import java.io.File;
 
+import static values.Constants.LOGIN_ADMIN;
+import static values.Constants.PASSWORD_ADMIN;
 import static steps.Steps.API_STEPS;
 
 public class ProfilePositiveTest {
@@ -16,7 +18,7 @@ public class ProfilePositiveTest {
     @Test
     @Order(1)
     void loginAdmin(){
-        AuthLogin authLogin = new AuthLogin("Rinwave", "abcd7777");
+        AuthLogin authLogin = new AuthLogin(LOGIN_ADMIN.toString(), PASSWORD_ADMIN.toString());
 
         AuthLoginResponse response = API_STEPS.login(authLogin);
         TOKEN = response.getJwtTokenPairDto().getAccessToken();

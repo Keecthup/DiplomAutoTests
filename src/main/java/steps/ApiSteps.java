@@ -2,11 +2,20 @@ package steps;
 
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
-import org.codehaus.groovy.control.messages.Message;
-import pojo.*;
+import model.requestDTO.AuthLogin;
+import model.requestDTO.EmailDto;
+import model.requestDTO.GuildOrderDto;
+import model.requestDTO.NewsRequestDto;
+import model.requestDTO.PasswordChangeDto;
+import model.responseDTO.AuthLoginResponse;
+import model.responseDTO.GuildOrder;
+import model.responseDTO.GuildOrderGroupDto;
+import model.responseDTO.HeadlineNewsGroupDto;
+import model.responseDTO.NewsResponseDto;
+import model.responseDTO.UserAccountDetailsDto;
+import model.responseDTO.UserProfileDto;
 
 import java.io.File;
-import java.util.Properties;
 
 public class ApiSteps {
     public AuthLoginResponse login(AuthLogin authLogin){

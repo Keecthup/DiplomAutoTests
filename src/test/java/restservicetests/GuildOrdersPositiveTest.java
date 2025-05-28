@@ -2,24 +2,22 @@ package restservicetests;
 
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
-import pojo.AuthLogin;
-import pojo.AuthLoginResponse;
-import pojo.GuildOrder;
-import pojo.GuildOrderDto;
+import model.requestDTO.AuthLogin;
+import model.responseDTO.AuthLoginResponse;
+import model.responseDTO.GuildOrder;
+import model.requestDTO.GuildOrderDto;
 
 import java.util.List;
 
-import static Values.Constants.GUILD_NAME;
+import static values.Constants.*;
 import static steps.Steps.API_STEPS;
-import static Values.Constants.GUILD_CONTENT;
-import static Values.Constants.GUILD_PSEYDONIM;
 
 public class GuildOrdersPositiveTest {
     private static String  TOKEN;
     @Test
     @Order(1)
     void loginAdmin(){
-        AuthLogin authLogin = new AuthLogin("Rinwave", "abcd7777");
+        AuthLogin authLogin = new AuthLogin(LOGIN_ADMIN.toString(), PASSWORD_ADMIN.toString());
 
         AuthLoginResponse response = API_STEPS.login(authLogin);
         TOKEN = response.getJwtTokenPairDto().getAccessToken();

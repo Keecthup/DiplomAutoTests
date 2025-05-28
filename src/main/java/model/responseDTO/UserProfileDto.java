@@ -1,4 +1,4 @@
-package pojo;
+package model.responseDTO;
 
 import lombok.Data;
 

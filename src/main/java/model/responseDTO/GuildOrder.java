@@ -1,11 +1,10 @@
-package pojo;
+package model.responseDTO;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
-@AllArgsConstructor
-public class GuildOrderDto {
+public class GuildOrder {
+    private Integer id;
     private String header;
     private String message;
     private String pseudonym;

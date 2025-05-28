@@ -1,4 +1,4 @@
-package pojo;
+package model.responseDTO;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;

@@ -1,4 +1,4 @@
-package pojo;
+package model.responseDTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,5 +11,5 @@ import java.util.List;
 @NoArgsConstructor
 public class HeadlineNewsGroupDto {
     List<HeadlineNewsDto> news;
-    int countPage;
+    Integer countPage;
 }

@@ -1,4 +1,4 @@
-package pojo;
+package model.responseDTO;
 
 import lombok.Data;
 
@@ -8,5 +8,5 @@ import java.util.List;
 
 public class GuildOrderGroupDto {
     List<GuildOrder> guildOrders;
-    int countPage;
+    Integer countPage;
 }

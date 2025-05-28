@@ -2,15 +2,15 @@ package restservicetests;
 
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
-import pojo.AuthLogin;
-import pojo.AuthLoginResponse;
-import pojo.HeadlineNewsDto;
-import pojo.NewsRequestDto;
+import model.requestDTO.AuthLogin;
+import model.responseDTO.AuthLoginResponse;
+import model.responseDTO.HeadlineNewsDto;
+import model.requestDTO.NewsRequestDto;
 
 import java.io.File;
 import java.util.List;
 
-import static Values.Constants.*;
+import static values.Constants.*;
 import static steps.Steps.API_STEPS;
 
 public class NewsPositiveTest {
@@ -18,7 +18,7 @@ public class NewsPositiveTest {
     @Test
     @Order(1)
     void loginAdmin(){
-        AuthLogin authLogin = new AuthLogin("Rinwave", "abcd7777");
+        AuthLogin authLogin = new AuthLogin(LOGIN_ADMIN.toString(), PASSWORD_ADMIN.toString());
 
         AuthLoginResponse response = API_STEPS.login(authLogin);
         TOKEN = response.getJwtTokenPairDto().getAccessToken();

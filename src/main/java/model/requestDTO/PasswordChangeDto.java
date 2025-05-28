@@ -1,4 +1,4 @@
-package pojo;
+package model.requestDTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

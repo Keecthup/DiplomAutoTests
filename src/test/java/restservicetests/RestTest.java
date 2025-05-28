@@ -1,12 +1,10 @@
 package restservicetests;
 
-import org.junit.jupiter.api.MethodOrderer;
+import model.requestDTO.AuthLogin;
+import model.requestDTO.EmailDto;
+import model.responseDTO.AuthLoginResponse;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
-import pojo.*;
-
-import java.io.File;
 
 import static steps.Steps.API_STEPS;
 
