@@ -60,4 +60,7 @@ public interface KPTCSMPTests extends Config {
 
     @Key("ACCOUNT_DETAIL_URL")
     String ACCOUNT_DETAIL_URL();
+
+    @Key("MAIN_PAGE_URL")
+    String MAIN_PAGE_URL();
 }

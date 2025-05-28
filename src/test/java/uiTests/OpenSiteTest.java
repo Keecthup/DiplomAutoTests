@@ -1,18 +1,17 @@
 package uiTests;
+import com.codeborne.selenide.SelenideElement;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.By;
 
-import java.util.concurrent.TimeUnit;
+import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.open;
 
 public class OpenSiteTest {
     @Test
     public void test(){
-        System.setProperty("webdriver.chrome.driver", "C:/Users/111/Downloads/chromedriver.exe");
-        WebDriver driver = new ChromeDriver();
-        driver.get("https://kptc-smp.ru/");
-        driver.manage().window().maximize();
-        driver.quit();
+            open ();
+            $(By.className(".relative.z-20.text-base.text-nowrap"));
         }
 
     }
