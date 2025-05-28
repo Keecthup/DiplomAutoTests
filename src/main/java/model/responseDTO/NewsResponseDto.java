@@ -6,7 +6,6 @@ import lombok.Data;
 import java.time.LocalDate;
 
 @Data
-
 public class NewsResponseDto {
     private Integer id;
     private String title;

@@ -12,6 +12,6 @@ import lombok.RequiredArgsConstructor;
 @AllArgsConstructor
 @RequiredArgsConstructor
 public class JwtTokenPairDto {
-    String refreshToken;
-    String accessToken;
+    private String refreshToken;
+    private String accessToken;
 }

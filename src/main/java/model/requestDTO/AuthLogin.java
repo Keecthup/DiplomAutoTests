@@ -11,8 +11,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-
 public class AuthLogin {
-    public String username;
-    public String password;
+    private String username;
+    private String password;
 }

@@ -10,6 +10,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class HeadlineNewsGroupDto {
-    List<HeadlineNewsDto> news;
-    Integer countPage;
+    private List<HeadlineNewsDto> news;
+    private Integer countPage;
 }
