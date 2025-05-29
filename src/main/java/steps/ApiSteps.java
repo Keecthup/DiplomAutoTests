@@ -63,7 +63,7 @@ public class ApiSteps {
         return RestAssured
                 .given()
                 .when()
-                .get(config.NEWS_URL() + id)
+                .get(config.NEWS_WITH_ID_URL() + id)
                 .then()
                 .statusCode(200)
                 .log().all()
@@ -77,7 +77,7 @@ public class ApiSteps {
                 .header("Authorization", "Bearer " + token)
                 .contentType("application/json")
                 .body(request)
-                .put(config.NEWS_URL() + id)
+                .put(config.NEWS_WITH_ID_URL() + id)
                 .then()
                 .extract().response().as(NewsResponseDto.class);
 
@@ -89,7 +89,7 @@ public class ApiSteps {
                 .header("Authorization", "Bearer " + token)
                 .multiPart("image", imageFile, "image/jpeg")
                 .when()
-                .put(config.NEWS_URL() + id + "/preview")
+                .put(config.NEWS_WITH_ID_URL() + id + "/preview")
                 .then()
                 .statusCode(200)
                 .log().all()
@@ -101,7 +101,7 @@ public class ApiSteps {
                 .given()
                 .header("Authorization", "Bearer " + token)
                 .when()
-                .delete(config.NEWS_URL() + id)
+                .delete(config.NEWS_WITH_ID_URL() + id)
                 .then()
                 .statusCode(200)
                 .log().all();
@@ -140,7 +140,7 @@ public class ApiSteps {
                 .body(order)
                 .contentType("application/json")
                 .when()
-                .put(config.GUILD_ONE_ORDER_URL() + id)
+                .put(config.GUILD_ID_URL() + id)
                 .then()
                 .statusCode(200)
                 .log().all()
@@ -153,7 +153,7 @@ public class ApiSteps {
                 .when()
                 .header("Authorization", "Bearer " + token)
                 .when()
-                .delete(config.GUILD_ONE_ORDER_URL() + id)
+                .delete(config.GUILD_ID_URL() + id)
                 .then()
                 .statusCode(200)
                 .log().all();

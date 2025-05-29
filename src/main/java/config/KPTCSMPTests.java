@@ -37,11 +37,17 @@ public interface KPTCSMPTests extends Config {
     @Key("NEWS_URL")
     String NEWS_URL();
 
+    @Key("NEWS_WITH_ID_URL")
+    String NEWS_WITH_ID_URL();
+
     @Key("NEWS_PAGE_URL")
     String NEWS_PAGE_URL();
 
     @Key("GUILD_ORDERS_URL")
     String GUILD_ORDERS_URL();
+
+    @Key("GUILD_ID_URL")
+    String GUILD_ID_URL();
 
     @Key("GUILD_ONE_ORDER_URL")
     String GUILD_ONE_ORDER_URL();

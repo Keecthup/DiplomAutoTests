@@ -25,7 +25,7 @@ public class GuildOrdersTests {
         for (SelenideElement el : elements){
             el.shouldBe(clickable, visible).click();
             $(".text-center.text-2xl.mb-4").should(exist,visible);
-            $("text-base.text-blue-600.font-bold").should(exist, visible);
+            $(".text-base.text-blue-600.font-bold").should(exist, visible);
         }
         $$(".bg-blue-800.border-none.text-white.hover\\:bg-blue-900.focus\\:outline-none").find(exactText("〉")).shouldBe(clickable, visible);
         $$(".bg-blue-800.border-none.text-white.hover\\:bg-blue-900.focus\\:outline-none").find(exactText("〈")).shouldBe(clickable, visible);
