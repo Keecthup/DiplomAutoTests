@@ -10,6 +10,12 @@ public interface KPTCSMPTests extends Config {
     @Key("PASSWORD_ADMIN")
     String PASSWORD_ADMIN();
 
+    @Key("LOGIN_USER")
+    String LOGIN_USER();
+
+    @Key("PASSWORD_USER")
+    String PASSWORD_USER();
+
     @Key("GUILD_NAME")
     String GUILD_NAME();
 

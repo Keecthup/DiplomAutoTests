@@ -30,7 +30,7 @@ public class ProfilePositiveTest {
     @Test
     @Order(3)
     void resetPassword(){
-        PasswordChangeDto password = new PasswordChangeDto("abcd7777", "abcd7778", "abcd7778");
+        PasswordChangeDto password = new PasswordChangeDto("neadminn", "neadminn", "neadminn");
         API_STEPS.resetPassword(password, TOKEN);
     }
 
