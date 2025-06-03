@@ -13,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @RequiredArgsConstructor
 public class AuthLoginResponse {
-    private JwtTokenPairDto jwtTokenPairDto;
+    private JwtTokenPairDto tokens;
     private List<String> roles;
 }
 

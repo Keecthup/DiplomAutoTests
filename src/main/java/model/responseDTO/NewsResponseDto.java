@@ -13,5 +13,5 @@ public class NewsResponseDto {
     private String content;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy HH:mm")
     private LocalDate datePublication;
-    private ImageResponseDto imageResponseDto;
+    private String imageUrl;
 }

@@ -13,5 +13,5 @@ public class ImageResponseDto {
     private String mimeType;
     private Long size;
     private LocalDateTime uploadedAt;
-    private String downloadUrl;
+    private String imageUrl;
 }

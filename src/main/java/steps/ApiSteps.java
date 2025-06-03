@@ -24,16 +24,16 @@ public class ApiSteps {
     public AuthLoginResponse login(AuthLogin authLogin){
         return RestAssured
                 .given()
-                .log().all()
                 .when()
                 .contentType(ContentType.JSON)
                 .body(authLogin)
                 .post(config.LOGIN_URL())
                 .then().statusCode(200)
+                .log().all()
                 .extract().response().body().as(AuthLoginResponse.class);
     }
 
-    public NewsResponseDto postNews(NewsRequestDto request, String token, File imageFile) {
+    public NewsResponseDto newsPost(NewsRequestDto request, String token, File imageFile) {
         return RestAssured
                 .given()
                 .header("Authorization", "Bearer " + token)
@@ -48,7 +48,34 @@ public class ApiSteps {
                 .extract().response().body().as(NewsResponseDto.class);
     }
 
-    public HeadlineNewsGroupDto allNews(String page){
+    public void newsUnAuthPost (NewsRequestDto request, File imageFile){
+        RestAssured
+                .given()
+                .multiPart("title", request.getTitle())
+                .multiPart("content", request.getContent())
+                .multiPart("image", imageFile, "image/jpeg")
+                .when()
+                .post(config.NEWS_URL())
+                .then()
+                .statusCode(401)
+                .log().all();
+    }
+
+    public void newsForbidenPost (NewsRequestDto request, File imageFile, String token){
+        RestAssured
+                .given()
+                .header("Authorization", "Bearer " + token)
+                .multiPart("title", request.getTitle())
+                .multiPart("content", request.getContent())
+                .multiPart("image", imageFile, "image/jpeg")
+                .when()
+                .post(config.NEWS_URL())
+                .then()
+                .statusCode(403)
+                .log().all();
+    }
+
+    public HeadlineNewsGroupDto newsList(String page){
         return RestAssured
                 .given()
                 .when()
@@ -59,7 +86,7 @@ public class ApiSteps {
                 .extract().response().body().as(HeadlineNewsGroupDto.class);
     }
 
-   public NewsResponseDto onenews(int id){
+   public NewsResponseDto newsFind(int id){
         return RestAssured
                 .given()
                 .when()
@@ -70,7 +97,7 @@ public class ApiSteps {
                 .extract().response().body().as(NewsResponseDto.class);
    }
 
-   public NewsResponseDto editNews(int id, NewsRequestDto request, String token){
+   public NewsResponseDto newsUpdateContent(int id, NewsRequestDto request, String token){
         return RestAssured
                 .given()
                 .when()
@@ -79,11 +106,35 @@ public class ApiSteps {
                 .body(request)
                 .put(config.NEWS_WITH_ID_URL() + id)
                 .then()
+                .log().all()
                 .extract().response().as(NewsResponseDto.class);
 
    }
 
-   public NewsResponseDto editPic(int id, File imageFile, String token){
+   public void newsUnAuthUpdateContent(int id, NewsRequestDto request){
+        RestAssured
+                .given()
+                .when()
+                .contentType("application/json")
+                .body(request)
+                .put(config.NEWS_WITH_ID_URL() + id)
+                .then()
+                .log().all();
+   }
+
+   public void newsForbidenUpdateContent(int id, NewsRequestDto request, String token){
+        RestAssured
+                .given()
+                .when()
+                .header("Authorization", "Bearer " + token)
+                .contentType("application/json")
+                .body(request)
+                .put(config.NEWS_WITH_ID_URL() + id)
+                .then()
+                .log().all();
+   }
+
+   public NewsResponseDto newsUpdatePic(int id, File imageFile, String token){
         return RestAssured
                 .given()
                 .header("Authorization", "Bearer " + token)
@@ -96,7 +147,30 @@ public class ApiSteps {
                 .extract().response().as(NewsResponseDto.class);
    }
 
-   public void deleteNews(int id, String token){
+   public void newsUnAuthUpdatePic(int id, File imageFile){
+        RestAssured
+                .given()
+                .multiPart("image", imageFile, "image/jpeg")
+                .when()
+                .put(config.NEWS_WITH_ID_URL() + id + "/preview")
+                .then()
+                .statusCode(401)
+                .log().all();
+   }
+
+   public void newsForbidenUpdatePic(int id, File imageFile, String token){
+        RestAssured
+                .given()
+                .header("Authorization", "Bearer " + token)
+                .multiPart("image", imageFile, "image/jpeg")
+                .when()
+                .put(config.NEWS_WITH_ID_URL() + id + "/preview")
+                .then()
+                .statusCode(403)
+                .log().all();
+   }
+
+   public void newsDelete(int id, String token){
         RestAssured
                 .given()
                 .header("Authorization", "Bearer " + token)
@@ -107,18 +181,39 @@ public class ApiSteps {
                 .log().all();
    }
 
-   public GuildOrderGroupDto guildAll(){
+   public void newsUnAuthDelete(int id){
+        RestAssured
+                .given()
+                .when()
+                .delete(config.NEWS_WITH_ID_URL() + id)
+                .then()
+                .statusCode(401)
+                .log().all();
+   }
+
+   public void newsForbidenDelete(int id, String token){
+        RestAssured
+                .given()
+                .header("Authorization", "Bearer " + token)
+                .when()
+                .delete(config.NEWS_WITH_ID_URL() + id)
+                .then()
+                .statusCode(403)
+                .log().all();
+   }
+
+   public GuildOrderGroupDto ordersList(String id){
         return RestAssured
                 .given()
                 .when()
-                .get(config.GUILD_ORDERS_URL())
+                .get(config.GUILD_ORDERS_URL()+"?page=" + id)
                 .then()
                 .statusCode(200)
                 .log().all()
                 .extract().response().as(GuildOrderGroupDto.class);
    }
 
-   public GuildOrder createOrder(GuildOrderDto order, String token){
+   public GuildOrder orderCreate(GuildOrderDto order, String token){
         return RestAssured
                 .given()
                 .when()
@@ -132,7 +227,32 @@ public class ApiSteps {
                 .extract().response().as(GuildOrder.class);
    }
 
-   public GuildOrder updateOrder(int id, GuildOrderDto order ,String token){
+   public void orderForbidenCreate(GuildOrderDto order, String token){
+       RestAssured
+               .given()
+               .when()
+               .header("Authorization", "Bearer " + token)
+               .body(order)
+               .contentType("application/json")
+               .post(config.GUILD_ONE_ORDER_URL())
+               .then()
+               .statusCode(403)
+               .log().all();
+   }
+
+   public void orderUnAuthCreate(GuildOrderDto order){
+        RestAssured
+                .given()
+                .when()
+                .body(order)
+                .contentType("application/json")
+                .post(config.GUILD_ONE_ORDER_URL())
+                .then()
+                .statusCode(401)
+                .log().all();
+   }
+
+   public GuildOrder orderUpdate(int id, GuildOrderDto order ,String token){
         return RestAssured
                 .given()
                 .when()
@@ -147,7 +267,35 @@ public class ApiSteps {
                 .extract().response().as(GuildOrder.class);
     }
 
-   public void deleteOrder(int id, String token){
+    public void orderUnAuthUpdate(int id, GuildOrderDto orderDto){
+        RestAssured
+                .given()
+                .when()
+                .body(orderDto)
+                .contentType("application/json")
+                .when()
+                .put(config.GUILD_ID_URL() + id)
+                .then()
+                .statusCode(401)
+                .log().all();
+    }
+
+    public void orderForbidenUpdate (int id, GuildOrderDto orderDto, String token){
+        RestAssured
+                .given()
+                .when()
+                .body(orderDto)
+                .header("Authorization", "Bearer " + token)
+                .body(orderDto)
+                .contentType("application/json")
+                .when()
+                .put(config.GUILD_ID_URL() + id)
+                .then()
+                .statusCode(403)
+                .log().all();
+    }
+
+   public void orderDelete(int id, String token){
         RestAssured
                 .given()
                 .when()
@@ -159,7 +307,29 @@ public class ApiSteps {
                 .log().all();
    }
 
-public void sendCode(EmailDto email){
+   public void orderUnAuthDelete(int id){
+        RestAssured
+                .given()
+                .when()
+                .when()
+                .delete(config.GUILD_ID_URL() + id)
+                .then()
+                .statusCode(401)
+                .log().all();
+   }
+
+   public void orderForbidenDelete(int id, String token){
+        RestAssured
+                .given()
+                .when()
+                .header("Authorization", "Bearer " + token)
+                .delete(config.GUILD_ID_URL() + id)
+                .then()
+                .statusCode(403)
+                .log().all();
+   }
+
+public void sendEmailCode(EmailDto email){
         RestAssured
                 .given()
                 .when()
@@ -171,7 +341,7 @@ public void sendCode(EmailDto email){
                 .log().all();
 }
 
-public void resetPassword(PasswordChangeDto password, String token){
+public void passwordUpdate(PasswordChangeDto password, String token){
         RestAssured
                 .given()
                 .when()
@@ -184,7 +354,7 @@ public void resetPassword(PasswordChangeDto password, String token){
                 .log().all();
 }
 
-public void changePicture(File imageFile,String token){
+public void changePFP(File imageFile,String token){
         RestAssured
                 .given()
                 .when()

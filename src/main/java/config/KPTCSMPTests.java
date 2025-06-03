@@ -31,11 +31,26 @@ public interface KPTCSMPTests extends Config {
     @Key("PNGPATH")
     String PNGPATH();
 
+    @Key("JPEGPATH")
+    String JPEGPATH();
+
+    @Key("SVGPATH")
+    String SVGPATH();
+
+    @Key("GIFPATH")
+    String GIFPATH();
+
     @Key("NEWS_NAME")
     String NEWS_NAME();
 
+    @Key("NEWS_NAME_MAX")
+    String NEWS_NAME_MAX();
+
     @Key("NEWS_CONTENT")
     String NEWS_CONTENT();
+
+    @Key("NEWS_CONTENT_MAX")
+    String NEWS_CONTENT_MAX();
 
     @Key("LOGIN_URL")
     String LOGIN_URL();
@@ -75,4 +90,13 @@ public interface KPTCSMPTests extends Config {
 
     @Key("MAIN_PAGE_URL")
     String MAIN_PAGE_URL();
+
+    @Key("GUILD_CONTENT_MAX")
+    String GUILD_CONTENT_MAX();
+
+    @Key("GUILD_NAME_MAX")
+    String GUILD_NAME_MAX();
+
+    @Key("GUILD_PSEYDONIM_MAX")
+    String GUILD_PSEYDONIM_MAX();
 }
