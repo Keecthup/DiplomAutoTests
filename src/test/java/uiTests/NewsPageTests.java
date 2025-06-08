@@ -8,9 +8,6 @@ import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 
-import static com.codeborne.selenide.Condition.clickable;
-import static com.codeborne.selenide.Condition.exactText;
-import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$$;
 import static com.codeborne.selenide.Selenide.open;
@@ -20,27 +17,29 @@ public class NewsPageTests {
     KPTCSMPTests baseURL = ConfigFactory.create(KPTCSMPTests.class);
 
     @Test
-    void LatestNews(){
+    void latestNews(){
         open(baseURL.MAIN_PAGE_URL());
+        //Открытие страницы новостей
         $(By.xpath("//*[@id=\"root\"]/header/div/nav/ul/li[2]/a")).shouldBe(visible).click();
-
-        $(By.className("_article_6p680_1")).shouldBe(visible).hover();
-        $(By.className("_article_6p680_1")).shouldBe(visible).click();
-        $(".z-10.relative.rounded-2xl.max-h-\\[500px\\].mx-auto.my-6").should(visible);
-        $(".text-4xl.break-all.mb-3").should(visible);
-        $(".text-blue-500.mb-2").should(visible);
-
+        //Просмотр последней новости(первая в списке)
+        $(By.className("_articlePreview_f10f5_38")).shouldBe(visible).hover();
+        $(By.className("_article_f10f5_1")).shouldBe(visible).click();
+        $(By.xpath("//*[@id=\"root\"]/div/main/div/img[2]")).should(visible);
+        $(By.xpath("//*[@id=\"root\"]/div/main/p")).should(visible);
+        $(By.xpath("//*[@id=\"root\"]/div/main/header/div/h1")).should(visible);
+        $(By.xpath("//*[@id=\"root\"]/div/main/header/p")).shouldBe(visible);
+       //Закрытие
         $(".ml-4").should(visible).click();
     }
     @Test
-    void AllPages(){
+    void allPages(){
         open(baseURL.MAIN_PAGE_URL());
+        //Открытие страницы новостей
         $(By.xpath("//*[@id=\"root\"]/header/div/nav/ul/li[2]/a")).shouldBe(visible).click();
-
+        //проверка пагинации
         ElementsCollection elementsPages = $$(".border-none.text-white.focus\\:outline-none.bg-blue-800.hover\\:bg-blue-900");
         for(SelenideElement pages : elementsPages) {
             $$("._article_6p680_1").last().shouldBe(visible);
         }
     }
-
 }

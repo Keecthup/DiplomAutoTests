@@ -12,6 +12,7 @@ import model.responseDTO.AuthLoginResponse;
 import model.responseDTO.GuildOrder;
 import model.responseDTO.GuildOrderGroupDto;
 import model.responseDTO.HeadlineNewsGroupDto;
+import model.responseDTO.ImageResponseDto;
 import model.responseDTO.NewsResponseDto;
 import model.responseDTO.UserAccountDetailsDto;
 import model.responseDTO.UserProfileDto;
@@ -134,7 +135,7 @@ public class ApiSteps {
                 .log().all();
    }
 
-   public NewsResponseDto newsUpdatePic(int id, File imageFile, String token){
+   public ImageResponseDto newsUpdatePic(int id, File imageFile, String token){
         return RestAssured
                 .given()
                 .header("Authorization", "Bearer " + token)
@@ -144,7 +145,7 @@ public class ApiSteps {
                 .then()
                 .statusCode(200)
                 .log().all()
-                .extract().response().as(NewsResponseDto.class);
+                .extract().response().as(ImageResponseDto.class);
    }
 
    public void newsUnAuthUpdatePic(int id, File imageFile){
@@ -354,8 +355,8 @@ public void passwordUpdate(PasswordChangeDto password, String token){
                 .log().all();
 }
 
-public void changePFP(File imageFile,String token){
-        RestAssured
+public ImageResponseDto changePFP(File imageFile,String token){
+        return RestAssured
                 .given()
                 .when()
                 .header("Authorization", "Bearer " + token)
@@ -363,7 +364,8 @@ public void changePFP(File imageFile,String token){
                 .put(config.CHANGE_AVATAR_URL())
                 .then()
                 .statusCode(200)
-                .log().all();
+                .log().all()
+                .extract().response().as(ImageResponseDto.class);
 }
 
 public UserProfileDto userProfile(String token){

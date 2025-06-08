@@ -3,6 +3,7 @@ package apiTests;
 import config.KPTCSMPTests;
 import model.requestDTO.EmailDto;
 import org.aeonbits.owner.ConfigFactory;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import model.requestDTO.AuthLogin;
@@ -19,7 +20,7 @@ public class ProfilePositiveTest {
     KPTCSMPTests config = ConfigFactory.create(KPTCSMPTests.class);
 
     @Test
-    @Order(1)
+    @BeforeEach
     void loginAdmin(){
         AuthLogin authLogin = new AuthLogin(config.LOGIN_ADMIN(), config.PASSWORD_ADMIN());
 

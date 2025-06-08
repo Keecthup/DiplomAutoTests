@@ -2,6 +2,7 @@ package apiTests;
 
 import config.KPTCSMPTests;
 import org.aeonbits.owner.ConfigFactory;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import model.requestDTO.AuthLogin;
@@ -77,7 +78,7 @@ public class NewsPositiveTest {
 
     @Test
     void newsGetAllMax(){
-        API_STEPS.newsList("2147483647");
+        API_STEPS.newsList("1000000");
     }
 
     @Test

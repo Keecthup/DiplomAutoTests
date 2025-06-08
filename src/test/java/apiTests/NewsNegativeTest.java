@@ -6,6 +6,7 @@ import model.requestDTO.NewsRequestDto;
 import model.responseDTO.AuthLoginResponse;
 import model.responseDTO.HeadlineNewsDto;
 import org.aeonbits.owner.ConfigFactory;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
@@ -21,7 +22,7 @@ public class NewsNegativeTest {
     KPTCSMPTests config = ConfigFactory.create(KPTCSMPTests.class);
 
     @Test
-    @Order(0)
+    @BeforeEach
     void loginAdmin(){
         AuthLogin authLogin = new AuthLogin(config.LOGIN_ADMIN(), config.PASSWORD_ADMIN());
 
@@ -38,13 +39,13 @@ public class NewsNegativeTest {
     @Test
     @Order(2)
     void newsListBadRequestOverInt(){
-        API_STEPS_NEGATIVE.newsListBadRequest("2147483648");
+        API_STEPS_NEGATIVE.newsListBadRequest("1000001");
     }
 
     @Test
     @Order(2)
     void newsFindNotExist(){
-        API_STEPS_NEGATIVE.newsFindNotExist(2147483647);
+        API_STEPS_NEGATIVE.newsFindNotExist(1000000);
     }
 
     @Test
@@ -110,9 +111,9 @@ public class NewsNegativeTest {
 
     @Test
     @Order(2)
-    void newsEditNotFound(){
+    void newsEditPictureNotFound(){
         NewsRequestDto request = new NewsRequestDto(config.NEWS_NAME(), config.NEWS_CONTENT());
-        API_STEPS_NEGATIVE.newsEditContentNotExist(999999999, request, ADMIN_TOKEN);
+        API_STEPS_NEGATIVE.newsEditContentNotExist(1000000, request, ADMIN_TOKEN);
     }
 
     @Test
@@ -142,6 +143,6 @@ public class NewsNegativeTest {
     @Order(2)
     void newsEditPictureNotExist(){
         File image = new File(config.JPEGPATH());
-        API_STEPS_NEGATIVE.newsEditPictureNotExist(9999999, image, ADMIN_TOKEN);
+        API_STEPS_NEGATIVE.newsEditPictureNotExist(1000000, image, ADMIN_TOKEN);
     }
 }

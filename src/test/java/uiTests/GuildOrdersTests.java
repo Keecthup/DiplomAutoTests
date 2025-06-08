@@ -17,26 +17,27 @@ import static com.codeborne.selenide.Selenide.open;
 public class GuildOrdersTests {
     KPTCSMPTests baseURL = ConfigFactory.create(KPTCSMPTests.class);
     @Test
-    void GuildOrders(){
+    void guildOrders(){
         open(baseURL.MAIN_PAGE_URL());
-        $(By.xpath("//*[@id=\"root\"]/header/div/nav/ul/li[3]/a")).shouldBe(visible).click();
-
+        $(By.xpath("//*[@id=\"root\"]/header/div/nav/ul/li[3]/a")).shouldBe(visible).click();//Открытие страницы с гильдиями
+        //проверка погинации
         $(By.xpath("//*[@id=\"root\"]/div/div/div/button[1]")).shouldBe(clickable, visible);
         $(By.xpath("//*[@id=\"root\"]/div/div/div/button[2]")).shouldBe(clickable, visible);
         $(".border-none.text-white.focus\\:outline-none.bg-blue-900.scale-95").shouldBe(exist, visible, clickable);
-
+        //Проверка каждого заказа
         ElementsCollection elementsPages = $$(".border-none.text-white.focus\\:outline-none.bg-blue-800.hover\\:bg-blue-900");
         for(SelenideElement pages : elementsPages) {
-            $$(".cursor-pointer.transiotion-filter.duration-200.ease.hover\\:brightness-75").last().shouldBe(visible);
-
-            ElementsCollection elementsOrders = $$(".cursor-pointer.transiotion-filter.duration-200.ease.hover\\:brightness-75");
+            $$(By.xpath("//*[@id=\"root\"]/div/div/div/button[4]")).last().shouldBe(visible);
+            ElementsCollection elementsOrders = $$("._orderImage_1vllh_19");
             for (SelenideElement orders : elementsOrders) {
                 orders.click();
-                $(".text-center.text-2xl.mb-4").should(exist, visible);
-                $(".text-base.text-blue-600.font-bold").should(exist, visible);
+                $("._orderTitle_7yqle_18").should(exist, visible);
+                $("._orderContent_7yqle_25").should(exist, visible);
+                $("._orderAuthor_7yqle_29").should(exist, visible);
             }
-            $(By.xpath("//*[@id=\"root\"]/div/div/div/button[2]")).click();
+            $(".bg-blue-800.border-none.text-white.hover\\:bg-blue-900.focus\\:outline-none").click();
         }
+
     }
 
 }

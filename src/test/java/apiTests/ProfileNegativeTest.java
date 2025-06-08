@@ -6,6 +6,7 @@ import model.requestDTO.PasswordChangeDto;
 import model.responseDTO.AuthLoginResponse;
 import org.aeonbits.owner.Config;
 import org.aeonbits.owner.ConfigFactory;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
@@ -20,7 +21,7 @@ public class ProfileNegativeTest {
     KPTCSMPTests config = ConfigFactory.create(KPTCSMPTests.class);
 
     @Test
-    @Order(1)
+    @BeforeEach
     void login(){
         AuthLogin authLogin = new AuthLogin(config.LOGIN_USER(), config.PASSWORD_USER());
         AuthLoginResponse response = API_STEPS.login(authLogin);

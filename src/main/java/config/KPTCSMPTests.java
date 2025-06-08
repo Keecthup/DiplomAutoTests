@@ -16,6 +16,9 @@ public interface KPTCSMPTests extends Config {
     @Key("PASSWORD_USER")
     String PASSWORD_USER();
 
+    @Key("MAIL_USER")
+    String MAIL_USER();
+
     @Key("GUILD_NAME")
     String GUILD_NAME();
 

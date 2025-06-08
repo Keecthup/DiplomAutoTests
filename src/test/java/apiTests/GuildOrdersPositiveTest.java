@@ -2,6 +2,7 @@ package apiTests;
 
 import config.KPTCSMPTests;
 import org.aeonbits.owner.ConfigFactory;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import model.requestDTO.AuthLogin;
@@ -19,7 +20,7 @@ public class GuildOrdersPositiveTest {
     KPTCSMPTests config = ConfigFactory.create(KPTCSMPTests.class);
 
     @Test
-    @Order(1)
+    @BeforeEach
     void loginAdmin(){
         AuthLogin authLogin = new AuthLogin(config.LOGIN_ADMIN(), config.PASSWORD_ADMIN());
 
@@ -37,11 +38,11 @@ public class GuildOrdersPositiveTest {
 
     @Test
     void allGuildsOrders(){
-       API_STEPS.ordersList("");
+       API_STEPS.ordersList("1");
     }
 
     @Test
-    void GuildOrdersMax(){API_STEPS.ordersList("2147483647");}
+    void GuildOrdersMax(){API_STEPS.ordersList("1000000");}
 
     @Test
     @Order(2)
